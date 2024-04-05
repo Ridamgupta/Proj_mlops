@@ -3,7 +3,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 
-with open('/content/Emocontext.txt', 'r') as file:
+with open('Emocontext.txt', 'r') as file:
     lines = file.readlines()
 
 data = []
