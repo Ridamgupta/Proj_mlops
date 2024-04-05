@@ -46,13 +46,43 @@ pipeline.fit(X_train, y_train)
 # Define routes for Flask app
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Prediction</title>
+</head>
+<body>
+    <h1>Emotion Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="text">Enter text:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
+"""
 
 @app.route('/predict', methods=['POST'])
 def predict():
     text = request.form['text']
     prediction = predict_emotion(text)
-    return render_template('result.html', prediction=prediction)
+    return f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Prediction Result</title>
+</head>
+<body>
+    <h1>Emotion Prediction Result</h1>
+    <p>Predicted emotion: {prediction}</p>
+</body>
+</html>
+"""
 
 def predict_emotion(text):
     prediction = pipeline.predict([text])
