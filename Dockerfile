@@ -8,7 +8,7 @@ WORKDIR /app
 COPY main.py .
 
 # Install the Python packages listed in the requirements.txt file using pip
-RUN pip install flask scikit-learn numpy torch
+RUN pip install flask scikit-learn pandas
 
 # Expose port 5000 to the outside world
 EXPOSE 5000
