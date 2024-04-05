@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Ridamgupta/Proj_mlops.git']])
+            }
+        }
+        stage('Build'){
+            steps{
+                bat '''docker build -t hello-world-flask .'''
+                bat '''docker run -p 5000:5000 hello-world-flask'''
+            }
+        }
+    }
+}
