@@ -2,8 +2,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
-
-with open('Emocontext.txt', 'r') as file:
+import os
+current_dir = os.getcwd()
+file_name = 'Emocontext.txt'
+file_path = os.path.join(current_dir, file_name)
+with open(file_path, 'r') as file:
     lines = file.readlines()
 
 data = []
