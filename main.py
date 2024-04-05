@@ -7,7 +7,7 @@ def read_text_file_from_github(file_url):
     try:
         response = requests.get(file_url)
         if response.status_code == 200:
-            return response.text
+            return response.text.splitlines()  # Split text into lines
         else:
             print(f"Failed to fetch file from {file_url}. Status code: {response.status_code}")
             return None
