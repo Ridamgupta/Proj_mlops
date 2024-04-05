@@ -2,10 +2,21 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
-import os
-with open(r'"C:\ProgramData\Jenkins\.jenkins\workspace\Mlops_proj\Emocontext.txt"', 'r') as file:
-    lines = file.readlines()
-
+import requests
+def read_text_file_from_github(file_url):
+    try:
+        response = requests.get(file_url)
+        if response.status_code == 200:
+            return response.text
+        else:
+            print(f"Failed to fetch file from {file_url}. Status code: {response.status_code}")
+            return None
+    except requests.RequestException as e:
+        print(f"Error fetching file from {file_url}: {e}")
+        return None
+        
+github_file_url = "https://raw.githubusercontent.com/Ridamgupta/Proj_mlops/main/Emocontext.txt"
+lines = read_text_file_from_github(github_file_url)
 data = []
 for line in lines[1:]: 
     parts = line.strip().split('\t')
